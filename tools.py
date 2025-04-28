@@ -24,9 +24,15 @@ search = DuckDuckGoSearchRun()
 search_tool = Tool(
     name = "search",
     func = search.run,
-    description = "Search the web for information"
+    description = "Use for finding current information or ambiguous terms"
 )
 
 ## Creating Wikipedia Tool
-api_wrapper = WikipediaAPIWrapper(top_k_results = 1, doc_content_chars_max = 100)
-wiki_tool = WikipediaQueryRun(api_wrapper=api_wrapper)
+# api_wrapper = WikipediaAPIWrapper(top_k_results = 1, doc_content_chars_max =300)
+# wiki_tool = WikipediaQueryRun(api_wrapper=api_wrapper)
+wiki = WikipediaQueryRun(api_wrapper=WikipediaAPIWrapper(top_k_results=2, doc_content_chars_max=100))
+wiki_tool = Tool(
+    name="wikipedia",
+    func=wiki.run,
+    description="Use for historical facts and well-documented topics"
+)

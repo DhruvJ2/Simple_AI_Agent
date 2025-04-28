@@ -9,7 +9,7 @@ import os
 from tools import search_tool, wiki_tool, save_tool
 
 ## Insering apikey through .env file 
-load_dotenv("D:\Programming_workspaces\Python\AI_Agent\.env")
+load_dotenv("D:/Programming_workspaces/Python/AI_Agent/.env")
 apik = os.getenv("OPENAI_API_KEY")
 
 
@@ -30,7 +30,7 @@ prompt = ChatPromptTemplate.from_messages(
             "system",
             """
             You are a research assistant that will help generate a research paper.
-            Answer the user query and use neccessary tools. 
+            For every query, use both the Wikipedia and search tools to gather information, then save the combined summary to a file. 
             Wrap the output in this format and provide no other text\n{format_instructions}
             """,
         ),
@@ -50,10 +50,10 @@ agent = create_tool_calling_agent(
 agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 query = input("What can I help you research? ")
 raw_response = agent_executor.invoke({"query": query})
-# print(raw_response)
+print(f'Raw response : {raw_response}')
 
 try:
-    structured_ouput = parser.parse(raw_response.get("output")[0]["text"])
+    structured_ouput = parser.parse(raw_response.get("output"))
     print(structured_ouput)
 except Exception as e:
     print("Error Parsing response", e, "Raw Response", raw_response)
