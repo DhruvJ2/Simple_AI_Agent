@@ -30,7 +30,7 @@ search_tool = Tool(
 ## Creating Wikipedia Tool
 # api_wrapper = WikipediaAPIWrapper(top_k_results = 1, doc_content_chars_max =300)
 # wiki_tool = WikipediaQueryRun(api_wrapper=api_wrapper)
-wiki = WikipediaQueryRun(api_wrapper=WikipediaAPIWrapper(top_k_results=2, doc_content_chars_max=100))
+wiki = WikipediaQueryRun(api_wrapper=WikipediaAPIWrapper(top_k_results=2, doc_content_chars_max=500))
 wiki_tool = Tool(
     name="wikipedia",
     func=wiki.run,
